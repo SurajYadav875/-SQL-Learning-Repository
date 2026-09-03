@@ -1,0 +1,145 @@
+---i  am using Postgres Sql 
+
+
+--retrive all columns
+
+Select * from public.orders
+Select * from public.customers
+
+--retrive selected columns
+select id,first_name,score from customers
+
+--retrive the customer who has score is greater than 500
+Select * 
+From customers
+where score > 500;
+
+--retrive the customer who has score is not equal to 0
+
+Select * 
+From customers
+where score !=0;
+
+--retrive the customer who has score is  Null
+
+Select * 
+From customers
+where score is Null;
+
+--retrive the customer where country is germany
+
+Select * 
+From customers
+where country ='Germany';
+
+--retrive the customer where country is germany and output should show first_name & Country.
+Select first_name,country 
+From customers
+where country ='Germany';
+
+--sort you data in ASC and DESC
+
+select *
+from public.customers
+order by score Asc;
+
+select *
+from public.customers
+order by score desc;
+--retrive all the customers and sort the result by the country and then by the highest score
+
+select *
+from customers 
+order by country asc, score desc
+
+select *
+from customers 
+order by score desc,country asc
+
+--find the total score for each country
+
+select 
+country,
+sum(score)
+from public.customers
+group by country
+
+--find the total score and total number of cutomers for each country.
+select 
+country,
+count(id) as total_customers,
+sum(score) as total_score
+from customers
+group by country
+
+select * from customers
+
+--using haivng query 
+select 
+country,
+Sum(score) as total_score
+from customers
+group by country
+having Sum(score)  > 800;
+
+--using where condition in having 
+select 
+country,
+Sum(score) as total_score
+from customers
+where score > 400
+group by country
+having Sum(score)  > 800
+
+--find the average score for each country considering only customers with a score not equal to 0 and return only 
+--thoses countries with an average sore greater than 430
+select * from customers
+
+select
+country,
+round(avg(score),0) as avg_score
+from customers
+where score != 0
+group by country
+having avg(score) > 430.
+
+--distinct value return unique list of all countries
+
+Select distinct country
+from customers
+
+--retrive only 3 customers
+
+select *
+from customers
+limit 3;
+
+--retrive the lowest 2 customers based on the score 
+Select * 
+from customers
+order by score asc
+limit  2;
+
+--retrive the highest 2 customers based on the score 
+
+Select * 
+from customers
+order by score desc
+limit  2;
+
+--get the two most recent orders
+Select * 
+from orders
+order by order_date desc
+limit 2
+
+
+
+
+
+
+
+
+
+
+
